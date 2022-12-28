@@ -86,7 +86,8 @@ Matrix<T>& Matrix<T>::operator () (int m, int n, const T& value)
         auto jt = (*it).begin();
         jt += n;
         (*jt) = value;
-        return *this; }
+        return *this;
+    }
     else throw "Incorrect index values!";
 
 }
@@ -94,7 +95,7 @@ Matrix<T>& Matrix<T>::operator () (int m, int n, const T& value)
 template <class T>
 Matrix<T> Matrix<T>::operator + (const Matrix<T>& rhs) {
     if ((rows == rhs.rows) && (columns == rhs.columns)) {
-        Matrix<T> result = * this;
+        Matrix<T> result = *this;
 
         auto iter = rhs.cbegin();
         for (auto it = result.begin(); it != result.end(); it++)
@@ -180,7 +181,7 @@ Matrix<T> Matrix<T>::operator * (const T& h) {
 }//
 
 template <class T>
-Matrix<T> Matrix<T>::operator / (const T& h) { 
+Matrix<T> Matrix<T>::operator / (const T& h) {
     Matrix<T> result = *this;
     if (h == T(0))
     {
@@ -188,7 +189,7 @@ Matrix<T> Matrix<T>::operator / (const T& h) {
     }
     else
     {
-        
+
         for (auto it = result.begin(); it != result.cend(); it++)
             for (auto jt = it->begin(); jt != it->cend(); jt++)
                 (*jt) = (*jt) / h;
@@ -208,7 +209,7 @@ void Matrix<T>::EnterMatrix() {
     cin >> newColumns;
 
     Matrix<T> newMatrix(newRows, newColumns);
-    
+
     for (int i = 0; i < newRows; i++)
         for (int j = 0; j < newColumns; j++) {
             std::cout << "Cell (" << i << ", " << j << ") = ";
@@ -221,6 +222,51 @@ void Matrix<T>::EnterMatrix() {
         for (int j = 0; j < columns; j++)
             matrix[i][j] = newMatrix.matrix[i][j];
 }
+
+
+
+
+// == and !=
+
+template <class T>
+bool Matrix<T>::operator == (const Matrix<T>& rhs) {
+    bool result = true;
+    if ((rows == rhs.rows) && (columns == rhs.columns)) {
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < columns; j++)
+                if (matrix[i][j] != rhs.matrix[i][j])
+                    //if (abs(matrix[i][j] - rhs.matrix[i][j])>epsilon)
+                {
+                    result = false;
+                }
+    }
+    else
+    {
+        result = false;
+    }
+    return result;
+
+}
+
+template <class T>
+bool Matrix<T>::operator != (const Matrix<T>& rhs) {
+    bool result = false;
+    if ((rows == rhs.rows) && (columns == rhs.columns)) {
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < columns; j++)
+                if (matrix[i][j] != rhs.matrix[i][j])
+                {
+                    result = true;
+                }
+    }
+    else
+    {
+        result = true;
+    }
+    return result;
+
+}
+
 
 
 template <class T>

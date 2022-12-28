@@ -36,7 +36,7 @@ public:
 	Matrix() = default; //
 	Matrix(const Matrix& Matrix) = default;//
 	Matrix(int rows, int columns); //
-	void EnterMatrix(); 
+	void EnterMatrix();
 	T operator () (int i, int j); //
 
 	Matrix operator + (const Matrix& rhs);//
@@ -44,6 +44,8 @@ public:
 	Matrix operator * (const Matrix& rhs);//
 	Matrix operator * (const T& h);//
 	Matrix operator / (const T& h);//
+	bool operator == (const Matrix& rhs);
+	bool operator!=(const Matrix<T>& rhs);
 	Matrix& operator () (int m, int n, const T& value);
 	auto cbegin() const { return matrix.cbegin(); }//
 
@@ -51,7 +53,7 @@ public:
 
 	friend std::ostream& operator << (std::ostream& s, const Matrix& matrix)
 	{
-	
+
 		for (auto it = matrix.cbegin(); it != matrix.cend(); it++)
 		{
 			for (auto iter : (*it))

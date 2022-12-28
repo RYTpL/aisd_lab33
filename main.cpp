@@ -265,7 +265,24 @@ int menu()
             int y;
             cin >> y;
             std::cout << "\nthe value of the element: " << A(x, y);
+
             break;
+        }
+        case 57:
+        {
+
+            system("cls");
+            std::cout << "Matrix Comparison.\n Enter epsilon: " << endl;
+            std::cin >> A.epsilon;
+            if (A == B)
+            {
+                std::cout << "A == B\n";
+            }
+            else
+            {
+                std::cout << "A!=B\n";
+            }
+
         }
         }
         while (true)
